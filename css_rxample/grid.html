@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Example</title>
+    <style>
+
+        @keyframes wobble {
+            /*from and to is working in only 2 state*/
+           /*from {
+                background-color: red;
+                box-shadow: 0 0 100px red;
+            }
+            to{
+                box-shadow: 0 0 4px green;
+            }*/
+            
+            0%{
+                rotate: -10deg;
+                border-radius: 300px;
+            }
+            25%{
+                rotate: 10deg;
+                transform: skewY(-5deg);
+                box-shadow: 2px 2px 2px black;
+
+            }
+            50%{
+                rotate: -10deg;
+            }
+            75%{
+                rotate: 10deg;
+                transform: skewY(5deg);
+            }
+            100%{
+                rotate: -10deg;
+                transform: skewY(0);
+                box-shadow: 1px 1px 1px 4px black;
+                border-radius: 0px;
+            }
+
+          
+
+        }
+
+        .container{
+            display: grid;
+            /*grid-template-columns: 350px 350px 350px 350px;*/
+            /*grid-template-columns: 1fr 1fr 1fr 1fr;*/
+            /*grid-template-columns: repeat(4, 1fr);*/
+            gap: 1rem;
+            /* make flexible */
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            
+        }
+
+        .image{
+            box-shadow: 0 0 2px #333;
+            padding: 1rem;
+            align-items: center;
+            transition: all 250ms ease 2s;
+           /* scale: .5;
+            rotate: 30deg;
+            translate: -50px 50px;*/
+            animation: wobble 2s ease infinite;
+        }
+        .image:hover{
+            transform: rotate(10deg) scale(1.5);
+            background-color:aliceblue;
+        }
+    </style>
+
+</head>
+<body>
+    <center><h1><b>GRID Basic Example</b></h1></center>
+    <hr>
+    <div class="container">
+        <div class="image"><img src="assets/images/1.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/2.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/3.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/5.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/4.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/6.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/7.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/8.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/9.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/WhatsApp Image 2022-09-10 at 5.22.08 PM (1).jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/WhatsApp Image 2022-09-10 at 5.22.08 PM.jpeg" alt="" width="300px"></div>
+        <div class="image"><img src="assets/images/WhatsApp Image 2022-09-10 at 5.22.08 PM (2).jpeg" alt="" width="300px"></div>
+    </div>
+</body>
+</html>
