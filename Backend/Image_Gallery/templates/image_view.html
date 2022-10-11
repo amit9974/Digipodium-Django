@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+{% block body %}
+<br><br>
+<div class="container">
+    <center><h1 class="display-1">View your Image</h1></center>
+    <div class="row align-item-center">
+        <div class="col-md-12 col-lg-3">
+            <img src="{{img.image.url}}" alt="{{img.title}}" style="height:400px; width:800px;">
+            <h1>{{img.title}}</h1>
+            <p>{{img.category}}</p>
+        </div>
+    </div>
+</div>
+{% endblock%}

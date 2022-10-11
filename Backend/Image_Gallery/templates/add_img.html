@@ -1,0 +1,24 @@
+{% extends 'layout/base.html' %}
+{% block body %}
+<br><br><br><br>
+
+<div class="container">
+    <h1 class="display-2">Add New Image</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3 col-sm-4">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" placeholder="Image Title" name='title'>
+        </div>
+        <div class="mb-3 col-sm-4">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-control" placeholder="Image Category" name="category">
+        </div>
+        <div class="mb-3 col-sm-4">
+            <label for="formFile" class="form-label">Upload Images </label>
+            <input class="form-control" type="file" id="formFile" name="image">
+        </div>
+        <a href=""><button class="btn btn-primary" type="submit">Upload</button></a>
+    </form>
+</div>
+{% endblock %}

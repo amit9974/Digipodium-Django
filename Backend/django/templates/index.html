@@ -1,46 +1,51 @@
-<!DOCTYPE html>
+{% extends 'layout/base.html' %}
+{% block body %}
 {% load static %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light display-3">Movies Adda</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
-        <style>
-            body{
-                padding: 0;
-                margin: 0;
-            }
-            main{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                width: 100%;
-                background-color: #5e03fc;
+  <!--Trending Movies -->
+  <div class="album py-4 bg-light">
+    <div class="container">
+      <h1 class="display-5" style="color:#38236e;">Trending Movies</h1>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+          {% for movie in movie %}
+          <div class="col">
+              <div class="card shadow-sm">
+              <img src="{{movie.img.url}}" alt="" style="height:270px;">
+              <div class="card-body">
+                  <p><b>{{movie.name}} (2022)</b></p>
+                  <p><b>Release on:</b> {{movie.release_date}}</p>
+                  <p class="card-text"><b>Actors : </b>{{movie.actor | truncatechars:20}} </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                      <a href="/details/{{movie.id}}/"><button type="button" class="btn btn-sm btn-warning">View</button></a>&nbsp;
+                      <button type="button" class="btn btn-sm btn-success">Watch</button>
+                  </div>
+                  </div>
+              </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  
 
-            }
-            h1{
-                color: white;
-                font-size: 3rem;
-            }
-            img{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
+    
+  
+   
+  </main>
 
-    </head>
-    <body>
-       <main>
-        <h1>Welcome to Django 4 </h1>
-        <img src="{% static 'images/1.png' %}" alt="" width="460" height="345"> 
-        </main>
-        
-        <script src="" async defer></script>
-    </body>
-</html>
+{% endblock body %}

@@ -1,0 +1,33 @@
+{% extends "layout/base.html" %}
+
+{% block body %}
+<div class="container-fluid">
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Django Image Gallery</h1>
+      <p class="col-md-8 fs-4">This is a Simple Django Image Gallery Project developed by using Python & Django.</p>
+      <a class="btn btn-primary" href="{% url 'add_img' %}" role="button"><i class="bi bi-plus-circle">Add New</i></a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    {% for img in img %}
+    <div class='col-lg-3 col-md-6 mb-3'>
+      <div class="card">
+        <img class="card-img-top" src="{{img.image.url}}" alt="Title" style="height:300px; width:305px;">
+        <div class="card-body">
+          <h4 class="card-title">{{img.title}}</h4>
+          <p class="card-text">{{img.category}}</p>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-danger" href="{% url 'delete' img.id %}" role="button"><i class="bi bi-trash3"></i></i></a>
+          <a class="btn btn-primary" href="{% url 'view_image' img.id %}" role="button"><i class="bi bi-eye"></i></i></i></a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+    
