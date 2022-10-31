@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+<style>
+    body{
+        background-color: #6baddb;
+    }
+</style>
+{% endblock %}
+{% load django_bootstrap5 %}
+{% block content %}
+<br><br>    
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-lg-4">
+            <h1>Register User</h1>
+            <form method="POST" >
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button "Register" type="submit" %}
+                <a href="{% url 'login' %}" class="nav-link">Already have an account? Login Now!</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}{% endblock %}

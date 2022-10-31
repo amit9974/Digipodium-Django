@@ -1,8 +1,8 @@
-from tkinter.messagebox import RETRY
-from turtle import RawTurtle
+from unicodedata import category
 from django.shortcuts import redirect, render
 from .models import *
 import os
+from .forms import ImageUploadForm, CategoryForm
 # Create your views here.
 
 def HomePage(request):
@@ -16,18 +16,36 @@ def HomePage(request):
 
 
 def add_category(request):
-    pass
+    form = CategoryForm()
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            cat = Category.objects.create(name=name)
+            cat.save()
+            return redirect('/')
+
+    ctx ={
+        'form':form
+    }
+    return render(request, 'add_cat.html', ctx)
+
 
 def add_image(request):
+    form = ImageUploadForm()
     if request.method == "POST":
-        title = request.POST['title']
-        image = request.POST['image']
-
-        new_img = Images.objects.create(id=id, title=title, image=image)
-        new_img.save()
-        return redirect('/')
-    else:
-        return render(request, 'add_img.html')
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            category = form.cleaned_data['category']
+            image = form.cleaned_data['image']
+            image = Images(title=title, category=category, image=image)
+            image.save()
+            return redirect('/')
+    ctx={
+        'form':form,
+    }
+    return render(request, 'add_img.html',ctx)
 
 
 def view_image(request,id):

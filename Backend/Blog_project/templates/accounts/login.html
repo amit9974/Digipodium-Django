@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+{% block css %}{% endblock %}
+{% load django_bootstrap5 %}
+{% block content %}
+<br><br>    
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-lg-4">
+            <h1>Sign in</h1>
+            <form method="POST" >
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button "Sign In" type="submit" %}
+                <a href="{% url 'register' %}" class="nav-link">Don't have and account? Register Free!</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}{% endblock %}

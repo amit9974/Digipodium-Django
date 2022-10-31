@@ -1,0 +1,62 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<br>
+<main class="container">
+  <div>
+    <ul class="nav justify-content-center">
+      {% for cat in cat %}
+      <div class="btn-group">
+        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          {{cat.name}}
+        </button>
+        &nbsp;&nbsp;
+        <ul class="dropdown-menu">
+          {% for sub in sub %}
+          {% if sub.categories == cat %}
+          <li><a class="dropdown-item" href="#">{{sub.name}}</a></li>
+          {% else %}
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </ul>
+    <br>
+    </div>
+      <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+        <div class="col-md-6 px-0">
+          <b><h1 class="display-5">Django Blogist Project</h1></b>
+          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+        </div>
+      </div>
+      
+      <div class="row mb-2">
+        {% for art in article %}
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary">{{art.category.name}}</strong>
+              <h3 class="mb-0">{{art.title}}</h3>
+              <div class="mb-1 text-muted">{{art.tag}}</div>
+              <p class="card-text mb-auto">{{art.content.image.url}} </p>
+              <p class="card-text mb-1"><b>Author:</b> {{art.author}} </p>
+              <p class="card-text mb-2"><b>Duration:</b> {{art.duration}} </p>
+              <a href="{% url 'details' art.id %}"><i class="bi bi-eye-fill"></i> Read</a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <img src="#" alt="", style='width:300px; height:250px;'>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    
+  </main>
+
+
+{% endblock %}
+
+
+
+{% block css %}{% endblock %}
+{% block js %}{% endblock %}

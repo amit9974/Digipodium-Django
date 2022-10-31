@@ -1,0 +1,93 @@
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+        integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    {% block css %}{% endblock %}
+    <style>
+        .navbar {
+            background-color: #f07452 !important;
+        }
+
+        .bg-red {
+            background-color: #eb1248c3 !important;
+        }
+
+        .bg-red:hover {
+            background-color: #1d0209c3 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-boxes me-2"></i>
+                Blogist
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#topbarId"
+                aria-controls="topbarId" aria-expanded="false" aria-label="toggle main menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topbarId">
+                <ul class="navbar-nav  ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/" aria-current="page"><i class="bi bi-house-door"></i>
+                            Home<span class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'new_post' %}"><i class="bi bi-plus-circle"></i> Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-tag"></i> Categories</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item shadow-sm rounded-2 bg-red px-2">
+                        <a class="nav-link text-white" href="{% url 'login' %}" title="Login">
+                            <i class="bi bi-person-check me-3"></i> Hi, {{user.username}}
+                        </a>
+                    </li>&nbsp;&nbsp;
+                    <li class="nav-item shadow-sm rounded-2 bg-red px-2">
+                        <a class="nav-link text-white" href="#" title="Logout">
+                            <i class="bi bi-person-dash me-3"></i> Logout
+                        </a>
+                    </li>&nbsp;&nbsp;
+                    {% else %}
+                    <li class="nav-item shadow-sm rounded-2 bg-red px-2">
+                        <a class="nav-link text-white" href="{% url 'register' %}" title="Register">
+                            <i class="bi bi-person-plus me-3"></i> Register
+                        </a>
+                    </li>&nbsp;&nbsp;
+                    <li class="nav-item shadow-sm rounded-2 bg-red px-2">
+                        <a class="nav-link text-white" href="{% url 'login' %}" title="Register">
+                            <i class="bi bi-person-check me-3"></i> Login
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% bootstrap_messages %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% bootstrap_javascript %}
+    {% block js %}{% endblock %}
+</body>
+
+</html>

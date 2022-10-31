@@ -1,0 +1,78 @@
+{% extends 'layout/base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 p-5 shadow-lg mt-5">
+            <h1 class="display-5">Write your Article ✒️</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form article_form %}
+                {{article_form.media}}
+                {% bootstrap_button "Save" type="submit" %}
+            </form>
+        </div>
+        <div class="col-md-4 px-3 mt-5">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">Add Media</h3>
+                </div>
+                <form action="" method="post" class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form image_form %}
+                    {% bootstrap_button "Add Media" type="submit" %}
+                </form>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3>Add New Category</h3>
+                </div>
+                <form action="" method="post" class="card-body" id="catform">
+                    {% csrf_token %}
+                    {% bootstrap_form cat_form %}
+                    {% bootstrap_button "Add Category" type="submit" %}
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Add Tags</h3>
+                </div>
+                <form action="" method="post" class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form tag_form %}
+                    {% bootstrap_button "Add Tags" type="submit" %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    //code.jquery.com/jquery
+    let catform = $('#catform');
+    catform.submit((e) => {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "{% url 'cat_create' %}",
+            data: catform.serialize(),
+            dataType: "json",
+            success: function (response) {
+                status = response.status;
+                if (status == 'success') {
+                    alert('Category added succesfully');
+                    let category = $('#id_category');
+                    category.append('<option>value="${id}", ${name}</option>');
+                }
+            }
+        });
+    })
+    
+</script>
+
+{% endblock %}

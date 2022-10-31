@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<main>
+    <div class="container py-2">
+        {% for blog in blog %}
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+              <div class="h-100 p-5 text rounded-3">
+                <img src="{{blog.image.url}}" alt="", style='width:600px; height:350px;'>
+              </div>
+            </div>
+
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-1">
+                    <h1 class="display-5 fw-bold">{{blog.caption}}</h1>
+                    <p class="col-md-8 fs-4">{{blog.post}}.</p>
+                    <p><b>Author Name: </b> {{blog.author.name}}</p>
+                    <p><b>Follow on: </b>Facebook Twiter Youtube</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </main>
+
+
+{% endblock %}
