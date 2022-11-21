@@ -53,28 +53,23 @@ def CategoryView(request):
     else:
         return JsonResponse({'status':'Invalid data'})
 
-    # cat_form = CategoryForm(request.POST or None)
-    # article_form = ArticleForm()
-    # image_form = ImageForm()
-    # tag_form  = TagsForm()
-    # if cat_form.is_valid():
-    #     cat_form.save()
-    #     messages.success(request, 'New Category has been added')
-    #     return redirect('/')
-    # ctx={
-    #     'cat_form':cat_form,
-    #     'article_form':article_form,
-    #     'image_form':image_form,
-    #     'tag_form':tag_form,
-    # }
-    # return render(request, 'blog/index.html',ctx)
-
 def TagsView(request):
     pass
 
 
 def ImageUploadView(request):
-    pass
+    if request.method =='POST':
+        image_form = ImageForm(request.POST, request.FILES)
+        print(image_form)
+        if image_form.is_valid():
+            image = image_form.save(commit=False)
+            image.save()
+            return JsonResponse({'status':'success', 'name': image.image.name, 'id':image.id})
+        else:
+            return JsonResponse({'status':'invalid data'})
+    else:
+        return JsonResponse({'status':'error'})
+
 
 
 # def NewPost(request):

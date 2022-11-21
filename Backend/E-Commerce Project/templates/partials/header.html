@@ -1,0 +1,206 @@
+{% load static %}
+<header class="header d-blue-bg">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-inner">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-7">
+                        <div class="header-inner-start">
+                            <div class="header__currency border-right">
+                                <div class="s-name">
+                                    <span>Language: </span>
+                                </div>
+                                <select>
+                                    <option>English</option>
+                                    <option>Deutsch</option>
+                                    <option>Français</option>
+                                    <option>Espanol</option>
+                                </select>
+                            </div>
+                            <div class="header__lang border-right">
+                                <div class="s-name">
+                                    <span>Currency: </span>
+                                </div>
+                                <select>
+                                    <option> USD</option>
+                                    <option>EUR</option>
+                                    <option>INR</option>
+                                    <option>BDT</option>
+                                    <option>BGD</option>
+                                </select>
+                            </div>
+                            <div class="support d-none d-sm-block">
+                                <p>Need Help? <a href="tel:+001123456789">+001 123 456 789</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-5 d-none d-lg-block">
+                        <div class="header-inner-end text-md-end">
+                            <div class="ovic-menu-wrapper">
+                                <ul>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Order Tracking</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-mid">
+        <div class="container">
+            <div class="heade-mid-inner">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
+                        <div class="header__info">
+                            <div class="logo">
+                                <a href="/" class="logo-image"><img src="{% static 'assets/img/logo/logo1.svg' %}" alt="logo"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                        <div class="header__search">
+                            <form action="#">
+                                <div class="header__search-box">
+                                    <input class="search-input" type="text" placeholder="I'm shopping for...">
+                                    <button class="button" type="submit"><i class="far fa-search"></i></button>
+                                </div>
+                                
+                                <div class="header__search-cat">
+                                    <select>
+                                        <option>Select Category</option>
+                                        {% for i in category %}
+                                        <option>{{i.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
+                        <div class="header-action">
+                            {% if user.is_authenticated %}
+                            <div class="block-userlink">
+                                <a class="icon-link" href="#">
+                                <i class="flaticon-user"></i><span class="text"><span class="sub">Welcome</span>
+                                {{user.username}}</span>
+                                </a>
+                            </div>
+                            <div class="block-userlink">
+                                <a class="icon-link" href="{% url 'logout' %}">
+                                <i class="flaticon-user"></i><span class="text"><span class="sub">Logout</span>
+                                {{user.username}}</span>
+                                </a>
+                            </div>
+                            {% else %}
+                            <div class="block-userlink">
+                                <a class="icon-link" href="#">
+                                <i class="flaticon-user"></i><span class="text"><span class="sub">Login </span>
+                                Account </span>
+                                </a>
+                            </div>
+                            <div class="block-userlink">
+                                <a class="icon-link" href="#">
+                                <i class="flaticon-user"></i></i><span class="text"><span class="sub">Create</span>
+                                Account </span>
+                                </a>
+                            </div>
+                            {% endif %}
+                            <div class="block-cart action">
+                                <a class="icon-link" href="#">
+                                <i class="flaticon-shopping-bag"></i>
+                          
+                                <span class="count">{{request.session.cart|length }}</span><span class="text">GO TO<span class="sub">Your Cart:</span>
+                             
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header__bottom">
+        <div class="container">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-3">                        
+                    <div class="cat__menu-wrapper side-border d-none d-lg-block">
+                        <a href="{% url 'home' %}"><button type="button" class="cat-toggle-btn cat-toggle-btn-1"><i class="fal fa-home"></i>HOME PAGE</button></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-2">
+                  <div class="header__bottom-left d-flex d-xl-block align-items-center">
+                    <div class="main-menu d-none d-lg-block">
+                        <nav>
+                            <ul>
+                                <li><a href="about.html">About Us</a></li>
+                                <li>
+                                    <a href="about.html">Pages <i class="far fa"></i></a>
+                                </li>
+                                <li><a href="#">Products <i class="far fa"></i></a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="active">SHOP BY CATEGORY<i class="far fa-angle"></i></a>
+                                    <ul class="megamenu-1">
+                                        {% comment %} {% for i in category %} {% endcomment %}
+                                        <li><a href="#"></a>
+                                        
+                                        {% comment %} {% for cat in i.sub_category_set.all %} {% endcomment %}
+                                            <ul class="mega-item">
+                                                <li><a href="index.html" class="active"></a></li>
+                                            </ul>
+                                        {% comment %} {% endfor %} {% endcomment %}
+                                        </li>
+                                        {% comment %} {% endfor %} {% endcomment %}
+                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-9">
+                    <div class="shopeing-text text-sm-end">
+                        <p>Spend $120 more and get free shipping!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- offcanvas area start -->
+<div class="offcanvas__area">
+    <div class="offcanvas__wrapper">
+    <div class="offcanvas__close">
+        <button class="offcanvas__close-btn" id="offcanvas__close-btn">
+            <i class="fal fa-times"></i>
+        </button>
+    </div>
+    <div class="offcanvas__content">
+        <div class="offcanvas__logo mb-40">
+            <a href="index.html">
+            <img src="{% static 'assets/img/logo/logo-white.png1' %}" alt="logo">
+            </a>
+        </div>
+        <div class="offcanvas__search mb-25">
+            <form action="#">
+                <input type="text" placeholder="What are you searching for?">
+                <button type="submit" ><i class="far fa-search"></i></button>
+            </form>
+        </div>
+        <div class="mobile-menu fix"></div>
+        <div class="offcanvas__action">
+        </div>
+    </div>
+    </div>
+</div>
+<!-- offcanvas area end -->      
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
